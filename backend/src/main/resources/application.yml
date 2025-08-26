@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/onlinevotingsystem}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+logging:
+  level:
+    org.springframework.security: INFO
+
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:change-me-please}
+      expiration-ms: ${JWT_EXPIRATION_MS:900000} # 15 minutes
+      refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000} # 7 days
